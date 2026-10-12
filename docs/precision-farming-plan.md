@@ -1,9 +1,9 @@
-# Factora Precision Farming
+# FactorAIoT Farm
 
 ## Global product strategy and Kenya launch plan
 
 **Prepared:** 12 October 2026  
-**Product surface:** `iot.factoraerp.com`  
+**Product surface:** `farm.factoraiot.com`  
 **Scope:** Global precision-farming product. Kenya is the first operating market.  
 **Status:** Discovery and implementation blueprint  
 **Important:** Regulatory sections are planning guidance, not legal advice.
@@ -12,7 +12,7 @@
 
 ## 1. Executive recommendation
 
-Build one global precision-farming module inside Factora ERP, and launch it in Kenya. Kenya is the first country pack and reference deployment, not a separate product and not a set of assumptions baked into the platform.
+Build one global precision-farming product at `farm.factoraiot.com`, integrate it with Factora ERP, and launch it in Kenya. Kenya is the first country pack and reference deployment, not a separate product and not a set of assumptions baked into the platform.
 
 The first commercial slice is an **offline-first water and crop-risk workflow**, not a standalone farm app and not an autonomous “AI agronomist.”
 
@@ -92,7 +92,7 @@ Opening a country is a configuration and compliance release, not a fork of the c
 
 ### Global customers
 
-An exporter, processor, or farm group may manage sites in more than one country under one Factora tenant.
+An exporter, processor, or farm group may manage sites in more than one country under one FactorAIoT Farm tenant.
 
 - Each site carries its country, time zone, currency, and residency region.
 - Users see consolidated operations, with money converted only for presentation and with the exchange-rate source and date shown.
@@ -110,10 +110,10 @@ Do not schedule a second country until all of these are true:
 - The Kenya advisory pilot meets its reliability, action, and outcome gates.
 - A second language, currency display, administrative hierarchy, and radio profile can be configured without a code fork.
 - Hardware certification is a catalogue entry, not a Kenya-only screen.
-- Factora has a named payer, installer, and agronomy approver for the next country.
+- FactorAIoT has a named payer, installer, and agronomy approver for the next country.
 - Privacy, radio, and input-advice reviews are complete for that country.
 
-The next country should be chosen from Factora's actual customers and service capacity. It should not be selected in advance from a generic market list.
+The next country should be chosen from FactorAIoT's actual customers and service capacity. It should not be selected in advance from a generic market list.
 
 ---
 
@@ -132,7 +132,7 @@ Farm decisions are often based on fixed schedules, visual inspection, generalize
 
 ### Product promise
 
-> Factora tells the right person what needs attention, where, why, and by when; creates the corresponding ERP task; and measures whether the action improved water use, cost, quality, or yield.
+> FactorAIoT Farm tells the right person what needs attention, where, why, and by when; creates the corresponding ERP task; and measures whether the action improved water use, cost, quality, or yield.
 
 ### Principles
 
@@ -195,7 +195,7 @@ National SIM or coverage figures overstate what an individual farmer can use. Pr
 
 ### 4.4 Public data and ecosystem in Kenya
 
-Factora should integrate available public or partner data rather than attempt to replace national systems:
+FactorAIoT Farm should integrate available public or partner data rather than attempt to replace national systems:
 
 - Kenya Meteorological Department data and forecasts where licensing and service access permit.
 - KALRO's Kenya Agricultural Observatory Platform (KAOP) and extension content.
@@ -241,7 +241,7 @@ Availability does not imply a production API or service-level agreement. Each so
 - Record serial number, GPS, depth, photo, calibration, firmware, and connectivity.
 - See low battery, silence, and calibration-due work.
 
-### Factora administrator
+### FactorAIoT administrator
 
 - Approve device models and payload schemas.
 - Provision tenants safely.
@@ -393,7 +393,7 @@ Solar farm gateway
   ├─ signed configuration and OTA updates
   └─ dual-SIM 4G backhaul where practical
           ↓ MQTT over TLS
-Factora IoT platform
+FactorAIoT Farm platform
   ├─ device identity and registry
   ├─ schema validation and normalization
   ├─ immutable raw telemetry
@@ -567,11 +567,11 @@ Only after advisory performance and hardware safety pass explicit gates:
 
 ---
 
-## 11. Factora ERP integration
+## 11. Factora ERP integration boundary
 
 ### Product navigation
 
-Add a **Precision Farming** area to `iot.factoraerp.com`:
+Host the **Precision Farming** product at `farm.factoraiot.com`. Connect it to Factora ERP through versioned APIs and domain events:
 
 1. **Today** — prioritized actions, critical assets, weather, and acknowledgment state.
 2. **Map** — farms and plots colored by actionable status, not raw sensor color alone.
@@ -617,7 +617,7 @@ Kenya's Data Protection Act 2019 applies when farm data can identify a person. N
 
 Before pilot enrollment:
 
-- Identify Factora's controller/processor role and each partner's role.
+- Identify FactorAIoT's controller/processor role and each partner's role.
 - Establish a lawful basis for each purpose.
 - Give a clear, channel-appropriate privacy notice.
 - Separate operational alerts from marketing consent.
@@ -672,7 +672,7 @@ Deliverables:
 - Define the global and country-pack boundary in the data model before building screens.
 - Interview farm owners, operators, agronomists, technicians, and county stakeholders.
 - Document current irrigation decisions, costs, failure modes, languages, and phone access.
-- Map the existing Factora ERP architecture, tenancy model, APIs, and notification stack.
+- Map the existing FactorAIoT platform and Factora ERP architecture, tenancy models, APIs, and notification stacks.
 - Test mobile signal, LoRa propagation, power, theft risk, and installation access on candidate sites.
 - Establish baseline water, yield, quality, labor, and input records.
 - Complete regulatory and privacy assessment.
@@ -837,7 +837,7 @@ Define target values with the pilot partner after baseline measurement. Do not i
 
 - Fertigation EC/pH service, disease-risk sensors, pump controls, advanced reports, or dedicated support.
 
-Prefer leasing or managed service for early deployments. Factora then controls calibration, replacement, firmware, and support quality instead of leaving farms with unsupported hardware.
+Prefer leasing or managed service for early deployments. FactorAIoT then controls calibration, replacement, firmware, and support quality instead of leaving farms with unsupported hardware.
 
 ### Unit economics template
 
@@ -914,15 +914,15 @@ The agronomy and field-operations functions are core product capabilities, not t
 
 ## 18. Decisions needed before engineering starts
 
-1. Which countries and value chains does Factora already serve, and which Kenya segment will launch first?
+1. Which countries and value chains does FactorAIoT or Factora ERP already serve, and which Kenya segment will launch first?
 2. Who is the paying customer in Kenya: farm, cooperative, exporter, county program, or input/irrigation partner?
 3. Which later markets must the data model accommodate now, even if they are not launched?
 4. What farm, plot, crop, inventory, work-order, currency, and accounting functions already exist in Factora ERP?
-5. Does Factora already have a device broker, tenant model, localization, messaging provider, and field-service workflow?
+5. Which device broker, tenant model, localization, messaging provider, and field-service workflow will `farm.factoraiot.com` own or reuse?
 6. Which water sources and irrigation methods dominate the candidate Kenyan farms?
 7. Which agronomist or research institution will approve the first Kenya crop profiles?
 8. Which exact hardware models have Kenyan approval, local spares, and equivalents that can later be approved elsewhere?
-9. Where is Factora data hosted, and which subprocessors and countries can receive farmer data?
+9. Where is FactorAIoT Farm data hosted, and which subprocessors and countries can receive farmer data?
 10. What outcome would cause the Kenya pilot partner to buy, and what evidence would justify opening country pack two?
 
 ---
@@ -933,7 +933,7 @@ The agronomy and field-operations functions are core product capabilities, not t
 2. Record the global-core and country-pack boundary before ERP schema design.
 3. Select three candidate Kenyan anchor partners and score them on farm density, crop value, irrigation, records, agronomy support, and willingness to pay.
 4. Run structured field discovery and an RF/power/site survey.
-5. Audit Factora ERP APIs, tenancy, localization, currency, work orders, notification stack, and hosting regions.
+5. Audit FactorAIoT Farm and Factora ERP APIs, tenancy, localization, currency, work orders, notification stack, and hosting regions.
 6. Obtain quotations and Kenyan approval evidence for two sensor/gateway vendors; bench-test both.
 7. Draft the Kenya pilot protocol, privacy notice, consent terms, data-sharing agreement, and DPIA.
 8. Define one Kenya crop-zone profile and the first 10–12 global rule templates with a Kenyan agronomist.
@@ -1032,7 +1032,7 @@ Kenya sources support the first country pack. Global standards define the platfo
 
 - Farm-size, irrigation-area, smartphone, and coverage figures vary by year and definition. Use them to size the first market, not as permanent product assumptions.
 - Coverage is not the same as reliable farm-level signal, and connected-handset counts are not the same as individual farmer smartphone ownership.
-- Vendor-reported yield or water-saving claims should not enter Factora forecasts without an independent field baseline in the operating country.
+- Vendor-reported yield or water-saving claims should not enter FactorAIoT forecasts without an independent field baseline in the operating country.
 - Government and third-party data portals may not provide production-grade APIs or guaranteed uptime.
 - A crop threshold, radio approval, or privacy term validated in Kenya must be revalidated before reuse in another country.
 

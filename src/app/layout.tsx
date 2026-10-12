@@ -17,9 +17,10 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Factora Precision Farming",
+  metadataBase: new URL("https://farm.factoraiot.com"),
+  title: "FactorAIoT Farm",
   description:
-    "Global precision-farming console for Factora. Kenya is the launch country pack.",
+    "Global precision-farming operations console. Kenya is the launch country pack.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -1,8 +1,8 @@
-# Factora Precision Farming
+# FactorAIoT Farm
 
-Global precision-farming module for `iot.factoraerp.com`. Kenya is the first country pack.
+Global precision-farming product hosted at `farm.factoraiot.com`. Kenya is the first country pack.
 
-The operations console turns field readings into specific actions: irrigate, stop, inspect a leak, refill a tank, or service a device. Global rules stay separate from the Kenya pack. A second reference pack has no farms and is not a market decision.
+The operations console turns field readings into specific actions: irrigate, stop, inspect a leak, refill a tank, or service a device. Global rules stay separate from the Kenya pack. A second reference pack has no farms and is not a market decision. Factora ERP remains an integration for work orders, inventory, costs, and harvest outcomes rather than the module's host.
 
 The research and rollout plan is in [docs/precision-farming-plan.md](docs/precision-farming-plan.md).
 

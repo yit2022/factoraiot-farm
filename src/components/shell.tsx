@@ -127,7 +127,7 @@ function Brand() {
   return (
     <div>
       <p className="text-xs font-medium tracking-[0.16em] text-muted-foreground uppercase">
-        Factora
+        FactorAIoT
       </p>
       <p className="mt-1 text-lg font-semibold">Precision farming</p>
       <p className="mt-2 text-sm text-muted-foreground">
