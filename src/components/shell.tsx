@@ -3,7 +3,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
+import { ExternalLink, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -14,6 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { tenant } from "@/lib/operations";
+import { FACTORA_ERP_URL } from "@/lib/product-links";
 import { cn } from "cn";
 
 const links = [
@@ -102,9 +103,19 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 </p>
               </div>
             </div>
-            <p className="hidden text-xs text-muted-foreground sm:block">
-              Advisory only
-            </p>
+            <div className="flex items-center gap-2">
+              <span className="hidden text-xs text-muted-foreground lg:inline">
+                Advisory only
+              </span>
+              <Button
+                nativeButton={false}
+                variant="outline"
+                render={<a href={FACTORA_ERP_URL} aria-label="Back to Factora ERP" />}
+              >
+                <span className="hidden sm:inline">Factora ERP</span>
+                <ExternalLink />
+              </Button>
+            </div>
           </header>
           <div className="px-4 py-5 md:px-8 md:py-8">{children}</div>
         </div>

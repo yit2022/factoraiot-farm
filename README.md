@@ -6,6 +6,20 @@ The operations console turns field readings into specific actions: irrigate, sto
 
 The research and rollout plan is in [docs/precision-farming-plan.md](docs/precision-farming-plan.md).
 
+## Product navigation
+
+Add this primary navigation action to `iot.factoraerp.com`:
+
+```tsx
+<a href="https://farm.factoraiot.com" aria-label="Open Precision Farming">
+  Precision Farming
+</a>
+```
+
+The link should open in the same tab. FactorAIoT Farm includes a **Factora ERP** button that returns to `https://iot.factoraerp.com`.
+
+Do not place tenant IDs, user IDs, access tokens, or farm IDs in this link. Shared authentication and tenant handoff require a signed, short-lived SSO exchange; they should not be implemented with plain query parameters.
+
 ## Run locally
 
 ```bash

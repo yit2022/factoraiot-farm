@@ -3,7 +3,7 @@
 ## Global product strategy and Kenya launch plan
 
 **Prepared:** 12 October 2026  
-**Product surface:** `farm.factoraiot.com`  
+**Product surface:** `farm.factoraiot.com`, launched from a **Precision Farming** button at `iot.factoraerp.com`  
 **Scope:** Global precision-farming product. Kenya is the first operating market.  
 **Status:** Discovery and implementation blueprint  
 **Important:** Regulatory sections are planning guidance, not legal advice.
@@ -572,6 +572,10 @@ Only after advisory performance and hardware safety pass explicit gates:
 ### Product navigation
 
 Host the **Precision Farming** product at `farm.factoraiot.com`. Connect it to Factora ERP through versioned APIs and domain events:
+
+The Factora ERP interface at `iot.factoraerp.com` provides a primary **Precision Farming** button linked to `https://farm.factoraiot.com`. The farm product provides a **Factora ERP** return action linked to `https://iot.factoraerp.com`. Both use same-tab navigation.
+
+The initial link carries no tenant, user, farm, or access-token query parameters. When shared sign-on is implemented, use a signed, short-lived server-side exchange with an allowlisted return URL rather than trusting identifiers from the browser address.
 
 1. **Today** — prioritized actions, critical assets, weather, and acknowledgment state.
 2. **Map** — farms and plots colored by actionable status, not raw sensor color alone.
