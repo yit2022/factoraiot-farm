@@ -1,11 +1,25 @@
 # Factora Precision Farming
 
-Research and implementation planning for the global precision-farming module at `iot.factoraerp.com`. Kenya is the first operating market.
+Global precision-farming module for `iot.factoraerp.com`. Kenya is the first country pack.
 
-The recommended first release is an offline-first irrigation and water-accountability workflow. The global platform handles sensors, decisions, and ERP actions. A Kenya country pack supplies the first languages, radio rules, crop thresholds, currency, and regulatory requirements.
+The operations console turns field readings into specific actions: irrigate, stop, inspect a leak, refill a tank, or service a device. Global rules stay separate from the Kenya pack. A second reference pack has no farms and is not a market decision.
 
-Read the full plan:
+The research and rollout plan is in [docs/precision-farming-plan.md](docs/precision-farming-plan.md).
 
-- [Global precision-farming strategy and Kenya launch plan](docs/precision-farming-plan.md)
+## Run locally
 
-The plan covers the global product model, Kenya market context, users, sensor kits, notification rules, architecture, ERP integration, data and model strategy, regulation, pilot design, commercialization, risks, and phased delivery gates.
+```bash
+npm install
+npm run dev
+```
+
+The dev server listens on [http://127.0.0.1:43123](http://127.0.0.1:43123).
+
+```bash
+npm test
+npm run lint
+```
+
+## What the sample shows
+
+The tenant is fictional Lakeview Growers in Naivasha, Nakuru County. Readings, Kiswahili messages, and the pumping tariff are sample data. Hardware is not marked as approved by the Communications Authority of Kenya. The console gives advice and records work. It does not open a valve.
