@@ -36,9 +36,9 @@ npm run lint
 
 ## GitHub deployment
 
-Pushes to `main` build a static export and publish it with GitHub Pages. The deployment is recorded on the `github-pages` environment.
+Pushes to `main` build a static export and publish it with GitHub Pages at [https://farm.factoraiot.com](https://farm.factoraiot.com). The deployment is recorded on the `github-pages` environment.
 
-The Pages site is [https://yit2022.github.io/factoraiot-farm/](https://yit2022.github.io/factoraiot-farm/). `farm.factoraiot.com` stays on its own DNS record and does not automatically follow this deployment.
+DNS for that hostname is a CNAME named `farm` pointing at `yit2022.github.io`. Leave the Cloudflare proxy off until GitHub finishes the certificate.
 
 ## What the sample shows
 
