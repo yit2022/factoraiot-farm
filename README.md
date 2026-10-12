@@ -34,6 +34,12 @@ npm test
 npm run lint
 ```
 
+## GitHub deployment
+
+Pushes to `main` build a static export and publish it with GitHub Pages. The deployment is recorded on the `github-pages` environment.
+
+The Pages site is [https://yit2022.github.io/factoraiot-farm/](https://yit2022.github.io/factoraiot-farm/). `farm.factoraiot.com` stays on its own DNS record and does not automatically follow this deployment.
+
 ## What the sample shows
 
 The tenant is fictional Lakeview Growers in Naivasha, Nakuru County. Readings, Kiswahili messages, and the pumping tariff are sample data. Hardware is not marked as approved by the Communications Authority of Kenya. The console gives advice and records work. It does not open a valve.
