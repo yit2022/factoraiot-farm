@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     ? {
         output: "export",
         trailingSlash: true,
+        basePath: "/factoraiot-farm",
         images: { unoptimized: true },
       }
     : {
