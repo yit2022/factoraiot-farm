@@ -1,12 +1,11 @@
-# Factora Precision Farming Kenya
+# Factora Precision Farming
 
-Research and implementation planning for a Kenya-focused precision-farming module at `iot.factoraerp.com`.
+Research and implementation planning for the global precision-farming module at `iot.factoraerp.com`. Kenya is the first operating market.
 
-The recommended first product is an offline-first irrigation and water-accountability system that links calibrated field sensors to Factora ERP actions, work orders, costs, and crop outcomes.
+The recommended first release is an offline-first irrigation and water-accountability workflow. The global platform handles sensors, decisions, and ERP actions. A Kenya country pack supplies the first languages, radio rules, crop thresholds, currency, and regulatory requirements.
 
 Read the full plan:
 
-- [Kenya precision-farming research and implementation plan](docs/precision-farming-kenya-plan.md)
+- [Global precision-farming strategy and Kenya launch plan](docs/precision-farming-plan.md)
 
-The document covers market segmentation, users, sensor kits, notification rules, architecture, ERP integration, data and model strategy, Kenya-specific regulation, pilot design, commercialization, risks, and phased delivery gates.
-
+The plan covers the global product model, Kenya market context, users, sensor kits, notification rules, architecture, ERP integration, data and model strategy, regulation, pilot design, commercialization, risks, and phased delivery gates.

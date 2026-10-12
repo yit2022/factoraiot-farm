@@ -1,9 +1,10 @@
-# Factora Precision Farming Kenya
+# Factora Precision Farming
 
-## Research, product strategy, and implementation plan
+## Global product strategy and Kenya launch plan
 
 **Prepared:** 12 October 2026  
 **Product surface:** `iot.factoraerp.com`  
+**Scope:** Global precision-farming product. Kenya is the first operating market.  
 **Status:** Discovery and implementation blueprint  
 **Important:** Regulatory sections are planning guidance, not legal advice.
 
@@ -11,17 +12,20 @@
 
 ## 1. Executive recommendation
 
-Build the first release as an **offline-first water and crop-risk module inside Factora ERP**, not as a separate generic farm app and not as an autonomous “AI agronomist.”
+Build one global precision-farming module inside Factora ERP, and launch it in Kenya. Kenya is the first country pack and reference deployment, not a separate product and not a set of assumptions baked into the platform.
 
-The product should:
+The first commercial slice is an **offline-first water and crop-risk workflow**, not a standalone farm app and not an autonomous “AI agronomist.”
+
+The global product should:
 
 1. Measure soil moisture at crop-root depths, local weather, tank level, irrigation flow, and equipment health.
 2. Combine those observations with crop stage, plot, soil, irrigation, work-order, inventory, and cost records already managed by the ERP.
 3. Turn readings into a small number of specific actions: irrigate, stop irrigation, inspect a leak, refill a tank, delay spraying, protect a crop from heat/frost, or service a device.
 4. Deliver actions through the channel each role can use: dashboard and WhatsApp for managers, SMS/voice for field workers and feature-phone farmers, and in-app work orders for operational teams.
-5. Begin with deterministic, agronomist-approved rules. Add predictive models only after collecting calibrated Kenyan field data and measuring whether the rules improve outcomes.
+5. Begin with deterministic, locally approved agronomic rules. Add predictive models only after calibrated field data from the operating market shows that the rules improve outcomes.
+6. Keep measurements, device protocols, tenancy, and workflows global. Put language, radio rules, geography, currency, weather sources, crop thresholds, and regulation in a country pack.
 
-### Recommended beachhead
+### Kenya beachhead
 
 Start with **irrigated, high-value horticulture** and an organization that can support multiple growers, such as a cooperative, exporter, irrigation scheme, processor, or commercial farm. The initial county and crop should be selected through partner access and field discovery rather than presumed nationally.
 
@@ -41,10 +45,79 @@ Do not lead with low-margin, rain-fed maize farms unless a cooperative, county p
 - Less than 5% of arable land is irrigated in frequently cited official estimates, and water access and management are major constraints.
 - Mobile network coverage is broad, but smartphone access, rural data use, electricity, and digital literacy are uneven. Sensor systems and user interfaces must tolerate intermittent service.
 - Soil sensors without calibration can produce confident but wrong recommendations. Operational quality is more important than adding more sensor types.
+- These conditions are globally relevant. A product that works through Kenya's connectivity, device, language, and regulatory constraints can be configured for other countries. A product designed only around Kenya cannot.
 
 ---
 
-## 2. Product thesis
+## 2. Global platform and country packs
+
+### One product, four configuration layers
+
+| Layer | Changes how often | Examples | Rule |
+|---|---|---|---|
+| Global platform | Rarely, through product releases | Device identity, telemetry schema, SI measurements, quality flags, rules engine, work orders, tenancy, audit | No country names, currencies, or radio bands in core logic |
+| Country pack | When a market opens or a regulator changes | Languages, administrative areas, radio profile, approved hardware, weather providers, privacy terms, input registries, taxes, support hours | Versioned and auditable; Kenya is pack `KE-1` |
+| Tenant configuration | Per customer | Farms, users, channels, branding, crop selections, billing plan, data-sharing permissions | A tenant may operate in more than one country |
+| Plot configuration | Per field and season | Crop, variety, planting date, soil calibration, irrigation hardware, sensor depths, local thresholds | Recommendations use this context, not a national average |
+
+### What Kenya must prove
+
+Kenya is the right first market because it forces the platform to handle the difficult cases:
+
+- Shared and feature phones as well as smartphones.
+- Intermittent mobile data and power.
+- More than one language.
+- Small plots and large commercial or outgrower operations in the same product.
+- Scarce or costly irrigation water.
+- Device approval, spectrum limits, and personal-data regulation.
+- Organizations that need ERP records, not only a sensor chart.
+
+Success in Kenya should produce reusable country-pack machinery and evidence that the water workflow changes farm decisions. It should not produce Kenya-only database columns, message text, or hardware assumptions.
+
+### Country-pack contents
+
+Each new country needs a pack before devices are sold there:
+
+1. **Locale:** languages, time zone, date and number formats, and message templates.
+2. **Geography:** administrative hierarchy and map boundaries. Kenya uses county, sub-county, and ward; another country may use state, province, or district.
+3. **Units and money:** SI values in storage; local display units and ISO currency in the interface. Kenya displays metric units and KES.
+4. **Radio and hardware:** permitted bands, duty cycle, power, certified models, antennas, and import rules. Kenya's initial profile is LoRaWAN EU863–870 where the Communications Authority permits it, plus cellular backhaul.
+5. **Connectivity partners:** mobile operators, SMS, USSD, WhatsApp, or email providers available in that country.
+6. **Weather and agronomy sources:** licensed forecast, soil, and extension sources, each with an availability fallback.
+7. **Crop profiles:** crop and growth-stage parameters approved for defined agroecological zones. A tomato profile approved in one Kenyan zone is not automatically valid in another country.
+8. **Regulation:** privacy notice, data-residency choice, device certification evidence, and the registered-input authority used for chemical guidance.
+9. **Commercial setup:** currency, tax, invoice requirements, warranty, and local support or installation partners.
+
+Opening a country is a configuration and compliance release, not a fork of the codebase.
+
+### Global customers
+
+An exporter, processor, or farm group may manage sites in more than one country under one Factora tenant.
+
+- Each site carries its country, time zone, currency, and residency region.
+- Users see consolidated operations, with money converted only for presentation and with the exchange-rate source and date shown.
+- Sensor data, farmer identity, and recommendations remain governed by the site's country pack.
+- A user in one country must not see another grower's personal data unless that organization has a lawful basis and an explicit role assignment.
+
+### Data residency
+
+The platform needs a region attribute per tenant or site. Kenya data should be able to remain in an approved hosting region. A later European deployment may require a different region and GDPR terms. Cross-border support access, backups, and model training are separate processing purposes and must be documented per country pack.
+
+### Expansion gate
+
+Do not schedule a second country until all of these are true:
+
+- The Kenya advisory pilot meets its reliability, action, and outcome gates.
+- A second language, currency display, administrative hierarchy, and radio profile can be configured without a code fork.
+- Hardware certification is a catalogue entry, not a Kenya-only screen.
+- Factora has a named payer, installer, and agronomy approver for the next country.
+- Privacy, radio, and input-advice reviews are complete for that country.
+
+The next country should be chosen from Factora's actual customers and service capacity. It should not be selected in advance from a generic market list.
+
+---
+
+## 3. Product thesis
 
 ### Problem statement
 
@@ -65,10 +138,10 @@ Farm decisions are often based on fixed schedules, visual inspection, generalize
 
 1. **Action before analytics.** Every prominent signal should map to a decision or task.
 2. **Advisory before autonomy.** Remote actuation comes only after field safety and accuracy are proven.
-3. **Local context before national averages.** Crop, growth stage, soil, irrigation method, and agroecological zone determine thresholds.
+3. **Local context before national or global averages.** Crop, growth stage, soil, irrigation method, and agroecological zone determine thresholds.
 4. **Raw data remains immutable.** Store raw, calibrated, and quality-flagged values separately.
 5. **Offline is normal.** Gateways buffer readings and local safety rules continue without cloud connectivity.
-6. **Feature phones are first-class.** A smartphone-only product excludes many intended users.
+6. **Channels are configurable.** Kenya requires SMS and feature-phone flows. Another market may be app-first, but the platform must support both.
 7. **Human accountability.** Important recommendations show their evidence and can be accepted, deferred, or rejected with a reason.
 8. **ERP-native workflow.** Alerts become work orders, resource usage becomes cost, and sensor assets have maintenance histories.
 
@@ -83,9 +156,9 @@ Farm decisions are often based on fixed schedules, visual inspection, generalize
 
 ---
 
-## 3. Kenya market and operating context
+## 4. First market operating context: Kenya
 
-### 3.1 Segments
+### 4.1 Segments
 
 | Segment | Need | Ability to pay | Recommended offer |
 |---|---|---:|---|
@@ -96,20 +169,20 @@ Farm decisions are often based on fixed schedules, visual inspection, generalize
 | Rain-fed smallholder | Planting and weather risk | Low individually | Shared station plus SMS advisory; avoid per-farm kit |
 | Dairy/livestock enterprise | Animal health, milk chilling, water | Potentially high | Later vertical after crop/water product is stable |
 
-### 3.2 Agroecological variation
+### 4.2 Agroecological variation
 
-Kenya cannot use one national threshold set. Highland horticulture, Rift Valley cereals, coastal farming, and arid and semi-arid lands differ in rainfall pattern, temperature, soil, water source, crop calendar, and disease pressure.
+Kenya cannot use one national threshold set. Highland horticulture, Rift Valley cereals, coastal farming, and arid and semi-arid lands differ in rainfall pattern, temperature, soil, water source, crop calendar, and disease pressure. The same principle applies inside every later country.
 
-The system needs:
+The global model needs:
 
-- Plot GPS and county/ward.
+- Country and that country's administrative area. In Kenya, this includes county and ward.
 - Crop variety, planting date, and phenological stage.
 - Soil texture and locally calibrated field capacity/wilting reference.
 - Irrigation method and emitter/flow characteristics.
-- Separate long-rains, short-rains, and local season calendars.
+- A local season calendar. In Kenya this includes the long rains, short rains, and local variation.
 - Rules approved for a crop-zone combination, not merely a crop name.
 
-### 3.3 Digital channels
+### 4.3 Digital channels in Kenya
 
 National SIM or coverage figures overstate what an individual farmer can use. Product design should assume:
 
@@ -120,7 +193,7 @@ National SIM or coverage figures overstate what an individual farmer can use. Pr
 - Kiswahili and English are baseline languages; partner research should determine where another local language is necessary.
 - Voice/IVR is a later accessibility option for low-literacy or urgent scenarios.
 
-### 3.4 Existing public data and ecosystem
+### 4.4 Public data and ecosystem in Kenya
 
 Factora should integrate available public or partner data rather than attempt to replace national systems:
 
@@ -134,7 +207,7 @@ Availability does not imply a production API or service-level agreement. Each so
 
 ---
 
-## 4. Users and jobs to be done
+## 5. Users and jobs to be done
 
 ### Farm owner or manager
 
@@ -176,9 +249,9 @@ Availability does not imply a production API or service-level agreement. Each so
 
 ---
 
-## 5. Core workflows
+## 6. Core workflows
 
-### 5.1 Farm onboarding
+### 6.1 Farm onboarding
 
 1. Create or select the ERP customer organization.
 2. Create farms, fields, blocks, and plots with boundaries.
@@ -190,7 +263,7 @@ Availability does not imply a production API or service-level agreement. Each so
 8. Complete installation QA: GPS, depth, orientation, photos, battery, radio test, calibration, and acceptance.
 9. Run a soak period during which recommendations are visible to agronomists but not automatically sent to farmers.
 
-### 5.2 Daily decision loop
+### 6.2 Daily decision loop
 
 1. Sensors report and the gateway stores and forwards readings.
 2. Ingestion validates schema, time, identity, and plausible ranges.
@@ -202,22 +275,22 @@ Availability does not imply a production API or service-level agreement. Each so
 8. Flow and moisture response verify whether the action occurred and had the expected effect.
 9. The outcome is captured for agronomic tuning and impact reporting.
 
-### 5.3 Device maintenance
+### 6.3 Device maintenance
 
 1. Detect a silent, stuck, drifting, low-battery, or implausible sensor.
 2. Suppress agronomic recommendations that depend on untrustworthy data.
 3. Create a technician work order with diagnostics.
 4. Record inspection, cleaning, recalibration, repair, replacement, and new baseline.
 
-### 5.4 Advisory approval
+### 6.4 Advisory approval
 
 Rules move through `draft → agronomist review → pilot → approved → retired`. Each alert records the rule version and inputs used. A changed rule must not rewrite old decisions.
 
 ---
 
-## 6. Sensor strategy
+## 7. Sensor strategy
 
-### 6.1 Minimum viable plot kit
+### 7.1 Minimum viable plot kit
 
 | Measurement | Purpose | Initial recommendation | Key caveat |
 |---|---|---|---|
@@ -229,18 +302,18 @@ Rules move through `draft → agronomist review → pilot → approved → retir
 | Mainline flow | Consumption, irrigation verification, leak detection | Pulse meter or suitable inline meter | K-factor, low-flow sensitivity, debris, and pipe conditions matter |
 | Gateway health | Reliability | Battery, solar charge, signal, storage, firmware, clock | Must be visible as operational data |
 
-### 6.2 Premium add-ons
+### 7.2 Premium add-ons
 
 - Inline EC and pH only for fertigation customers who can support frequent cleaning and calibration.
 - Leaf wetness for crops where an agronomist can provide a validated disease-risk model.
 - Pump current/pressure for dry-run, blocked line, and maintenance diagnosis.
 - Weather station wind speed/direction when spray-window guidance is in scope.
 
-### 6.3 Avoid misleading hardware claims
+### 7.3 Avoid misleading hardware claims
 
 Low-cost “NPK soil sensors” often infer nutrient status indirectly and cannot replace soil laboratory analysis. Do not market continuous nutrient readings unless the device is independently validated for the local soil and use case.
 
-### 6.4 Installation and calibration
+### 7.4 Installation and calibration
 
 Every installation record should include:
 
@@ -255,9 +328,9 @@ For soil moisture, use plot-specific calibration where possible. At minimum, est
 
 ---
 
-## 7. Notifications and decision rules
+## 8. Notifications and decision rules
 
-### 7.1 Notification payload
+### 8.1 Notification payload
 
 Every farmer-facing notification should answer:
 
@@ -276,7 +349,7 @@ Do not send:
 
 > Soil moisture sensor 7 = 21.8%.
 
-### 7.2 Initial alert catalogue
+### 8.2 Initial alert catalogue
 
 | Rule | Evidence | Action | Severity | Channel |
 |---|---|---|---|---|
@@ -294,7 +367,7 @@ Do not send:
 | Sensor stuck/drifting | Rate-of-change and cross-sensor checks | Suppress dependent advice; calibrate | Operational | Technician dashboard |
 | Battery/solar low | Device telemetry | Service power system | Operational | Work order |
 
-### 7.3 Alert controls
+### 8.3 Alert controls
 
 - Hysteresis prevents repeated triggering around a boundary.
 - Cooldown prevents message storms.
@@ -307,7 +380,7 @@ Do not send:
 
 ---
 
-## 8. Technical architecture
+## 9. Technical architecture
 
 ```text
 Field probes and meters
@@ -340,18 +413,24 @@ Factora ERP
   └─ harvest, quality and financial outcomes
 ```
 
-### 8.1 Connectivity
+### 9.1 Connectivity
 
-Recommended default:
+The platform supports more than one radio profile. The country pack selects the legal profile and certified hardware; the farm survey selects the practical option.
 
-- **LoRaWAN EU863–870 profile**, subject to current Communications Authority requirements, for multiple low-bandwidth sensors on a farm or cluster.
-- **Dual-SIM 4G gateway** for backhaul, with store-and-forward during outages.
-- Direct cellular RTU only for isolated assets where a gateway is uneconomical.
-- Local wired Modbus/SDI-12 where probes are close to the gateway/controller.
+Global options:
 
-Before selecting hardware, confirm current CA frequency, duty-cycle, power, type-approval, import, and licensed-provider requirements. A LoRa Alliance regional profile does not by itself prove Kenyan regulatory approval.
+- LoRaWAN using the regional parameters permitted in that country, such as EU863–870, US902–928, AS923, AU915–928, or IN865–867.
+- Cellular backhaul or a direct cellular RTU where a gateway is uneconomical.
+- Local wired SDI-12, RS-485 Modbus, pulse, or 4–20 mA where probes are close to the controller.
+- Store-and-forward during outages, regardless of country.
 
-### 8.2 Data contracts
+Kenya launch profile:
+
+- LoRaWAN EU863–870 where the Communications Authority permits the exact device, power, duty cycle, and antenna.
+- Dual-SIM 4G gateway backhaul where coverage and power budgets support it.
+- Confirm current approval, import, and licensed-provider requirements before buying a production batch. A LoRa Alliance regional profile does not prove national approval.
+
+### 9.2 Data contracts
 
 Canonical telemetry event:
 
@@ -359,6 +438,7 @@ Canonical telemetry event:
 {
   "schemaVersion": "1.0",
   "tenantId": "ten_...",
+  "countryCode": "KE",
   "deviceId": "dev_...",
   "siteId": "site_...",
   "plotId": "plot_...",
@@ -386,16 +466,21 @@ Required behaviors:
 
 - Idempotency by device, sequence, and observation timestamp.
 - Tolerate delayed and out-of-order events.
-- Record device time and receive time.
+- Store timestamps in UTC and display them in the farm's time zone.
+- Store measurements in SI units. Currency and display units come from the country pack or tenant preference.
 - Validate units and ranges at ingestion.
 - Keep raw payload for forensic analysis with controlled retention.
 - Do not permit devices direct access to ERP databases.
 
-### 8.3 Domain model
+### 9.3 Domain model
 
 Core hierarchy:
 
-`Tenant → Organization → Farm → Site/Block → Plot → Crop Season`
+`Tenant → Organization → Country site → Farm → Site/Block → Plot → Crop Season`
+
+Country-pack hierarchy:
+
+`Country pack → Locale → Administrative areas → Radio profile → Hardware catalogue → Crop-zone profiles → Regulatory terms`
 
 Asset hierarchy:
 
@@ -407,8 +492,8 @@ Decision hierarchy:
 
 Important entities:
 
-- Tenant, user, role, consent, notification preference.
-- Farm boundary, plot boundary, water source, irrigation zone.
+- Tenant, country pack, residency region, user, role, consent, notification preference, and locale.
+- Farm boundary, plot boundary, water source, irrigation zone, time zone, and currency.
 - Crop, variety, crop stage, crop profile, soil profile.
 - Device model, device, channel, installation, calibration, maintenance.
 - Observation, quality flag, aggregate.
@@ -418,7 +503,7 @@ Important entities:
 - Work order, assignment, completion evidence.
 - Harvest, quality grade, input use, labor, water, energy, revenue.
 
-### 8.4 Tenancy and security
+### 9.4 Tenancy and security
 
 - Put `tenant_id` on every customer-owned entity and enforce it at broker ACL, API authorization, database row policy, queue, cache, and object-storage prefix.
 - Use a unique identity and revocable credentials per device. Never share one credential across a fleet.
@@ -432,7 +517,7 @@ Important entities:
 
 ---
 
-## 9. Analytics and model strategy
+## 10. Analytics and model strategy
 
 “Precision farm model” should mean a progression of decision models, not one opaque model.
 
@@ -476,13 +561,13 @@ Only after advisory performance and hardware safety pass explicit gates:
 - Split evaluation by farm and season, not random readings from the same farm.
 - Compare against fixed schedules and agronomist practice.
 - Measure agronomic and economic outcomes, not prediction accuracy alone.
-- Check performance across county, soil type, crop stage, farm size, and gender/phone-access cohorts.
+- Check performance across country, administrative area, soil type, crop stage, farm size, and phone-access cohorts. Kenya reporting includes county and ward.
 - Record model/rule version and feature values for every decision.
 - Do not train on personally identifiable farmer data unless necessary, lawful, documented, and consented where required.
 
 ---
 
-## 10. Factora ERP integration
+## 11. Factora ERP integration
 
 ### Product navigation
 
@@ -510,9 +595,23 @@ Use an outbox/event boundary so an IoT outage does not corrupt ERP transactions 
 
 ---
 
-## 11. Privacy, regulation, and responsible advice
+## 12. Privacy, regulation, and responsible advice
 
-### 11.1 Data protection
+Regulation is implemented through country packs. The global product supplies the controls; each market supplies the legal content and evidence. This section is not legal advice. Counsel in every operating country must review the pack before launch.
+
+### Global controls
+
+- Identify the operator, customer, installer, and subprocessor roles for each country.
+- Keep personal data, farm boundaries, device telemetry, and aggregated agronomy separate.
+- Record a purpose, lawful basis, notice, retention period, and residency region for each processing activity.
+- Support access, correction, deletion, export, and consent withdrawal where the applicable law provides those rights.
+- Separate service alerts from marketing permissions.
+- Keep an inventory of cross-border transfers, support access, backups, and any use of data for model training.
+- Store device approvals against the exact hardware model and firmware family.
+- Treat pesticide and fertilizer guidance as regulated advice. Route product-specific recommendations through the country's registered-input rules and a qualified reviewer.
+- Never claim guaranteed yield, diagnosis, safety, or government endorsement.
+
+### 12.1 Kenya data protection
 
 Kenya's Data Protection Act 2019 applies when farm data can identify a person. Names, phone numbers, precise farm boundaries, GPS, photos, property details, and linked financial or production records require careful treatment.
 
@@ -532,9 +631,9 @@ Before pilot enrollment:
 
 Farmers must not lose service or subsidy access merely because they decline unrelated analytics, marketing, or data resale.
 
-### 11.2 Communications equipment and spectrum
+### 12.2 Kenya communications equipment and spectrum
 
-The Communications Authority regulates radio equipment, type approval, spectrum use, telecommunications services, numbering, and related providers.
+The Communications Authority regulates radio equipment, type approval, spectrum use, telecommunications services, numbering, and related providers. Its requirements belong in the Kenya country pack and must be revalidated for every later country.
 
 Before purchasing a production batch:
 
@@ -545,9 +644,9 @@ Before purchasing a production batch:
 - Validate cellular SIM registration and eSIM requirements.
 - Contract an MNO or properly licensed messaging provider for SMS/USSD services.
 
-### 11.3 Agronomic and pesticide advice
+### 12.3 Kenya agronomic and pesticide advice
 
-Rules concerning chemical products should be reviewed by a qualified Kenyan agronomist and comply with PCPB registration, label, advertising, and consumer-protection requirements.
+Rules concerning chemical products should be reviewed by a qualified local agronomist. In Kenya, they must comply with PCPB registration, label, advertising, and consumer-protection requirements. Another country's pesticide authority and label rules replace this pack; they do not reuse Kenyan product registrations.
 
 Product safeguards:
 
@@ -561,7 +660,7 @@ Product safeguards:
 
 ---
 
-## 12. Delivery plan and gates
+## 13. Delivery plan and gates
 
 The stages below are capability and evidence gates, not calendar estimates.
 
@@ -569,7 +668,8 @@ The stages below are capability and evidence gates, not calendar estimates.
 
 Deliverables:
 
-- Select one value chain, one or two counties, and one anchor partner.
+- Select Kenya as the first country pack, then one value chain, one or two counties, and one anchor partner.
+- Define the global and country-pack boundary in the data model before building screens.
 - Interview farm owners, operators, agronomists, technicians, and county stakeholders.
 - Document current irrigation decisions, costs, failure modes, languages, and phone access.
 - Map the existing Factora ERP architecture, tenancy model, APIs, and notification stack.
@@ -589,7 +689,8 @@ Exit gate:
 
 Deliverables:
 
-- Tenant-safe device registry and provisioning.
+- Tenant-safe device registry, country pack, locale, currency, and residency region.
+- Hardware catalogue that can contain approvals for more than one country.
 - MQTT ingestion, canonical schema, raw store, time-series store, quality flags, and audit.
 - Gateway store-and-forward and health monitoring.
 - Installer workflow and approved hardware catalogue.
@@ -598,7 +699,8 @@ Deliverables:
 
 Exit gate:
 
-- No cross-tenant access in security tests.
+- No cross-tenant or unauthorized cross-country access in security tests.
+- Kenya and a simulated second country pack can run without a code fork.
 - Delayed, duplicate, reordered, and malformed messages handled correctly.
 - Seven-day offline buffer demonstrated.
 - Device revocation and credential rotation demonstrated.
@@ -628,7 +730,7 @@ Send approved recommendations and create work orders, while farmers retain contr
 
 Deliverables:
 
-- Multichannel actions in English/Kiswahili.
+- Multichannel actions using Kenya's English and Kiswahili templates, through the global template system.
 - Acknowledgement and outcome tracking.
 - Treatment/control or stepped-wedge evaluation.
 - Weekly agronomist review of misses, false alerts, and adverse events.
@@ -648,7 +750,7 @@ Deliverables:
 - Support and maintenance SLAs.
 - Device replacement, calibration, and spare-parts process.
 - Subscription, billing, and partner administration.
-- County/crop profile governance.
+- Country, zone, and crop profile governance.
 - Operational dashboards and incident response.
 - Onboarding playbook and training materials.
 
@@ -675,7 +777,7 @@ Exit gate:
 
 ---
 
-## 13. Pilot design
+## 14. Pilot design
 
 ### Suggested shape
 
@@ -715,7 +817,7 @@ Define target values with the pilot partner after baseline measurement. Do not i
 
 ---
 
-## 14. Commercial model
+## 15. Commercial model
 
 ### Recommended packaging
 
@@ -770,7 +872,7 @@ Do not base the business case on selling farmer data. Any later consented analyt
 
 ---
 
-## 15. Team and ownership
+## 16. Team and ownership
 
 | Capability | Responsibility |
 |---|---|
@@ -782,14 +884,15 @@ Do not base the business case on selling farmer data. Any later consented analyt
 | Data engineer/scientist | Quality, water balance, experimentation, later models |
 | Field operations lead | Site survey, installation, calibration, maintenance, training |
 | Security/privacy lead | DPIA, contracts, controls, incident response, audits |
-| Kenyan legal/regulatory counsel | ODPC, CA, messaging, contracts, advisory liability |
+| Country regulatory counsel | Kenya first: ODPC, CA, messaging, contracts, and advisory liability. Repeat per country pack |
+| Localization and country-pack owner | Languages, units, geography, hardware approvals, and market configuration |
 | Partner agronomists/extension | Local validation, user support, escalation |
 
 The agronomy and field-operations functions are core product capabilities, not temporary pilot support.
 
 ---
 
-## 16. Major risks and mitigations
+## 17. Major risks and mitigations
 
 | Risk | Consequence | Mitigation |
 |---|---|---|
@@ -801,43 +904,63 @@ The agronomy and field-operations functions are core product capabilities, not t
 | Dangerous pesticide advice | Harm and liability | Scouting-first design, registered labels, agronomist review, audit |
 | Remote-control failure | Crop, pump, or safety damage | Defer automation; edge interlocks, manual stop, fault tests |
 | Tenant data leakage | Privacy and contractual breach | Layered tenant enforcement and security testing |
-| Regulatory mismatch | Import/deployment delay or sanctions | CA verification before purchasing hardware; local counsel |
+| Regulatory mismatch | Import, privacy, or deployment delay | Country-pack review before hardware purchase; local counsel in each market |
+| Kenya-specific hardcoding | A second country requires a product fork | SI units, UTC, country packs, template-based messages, and a simulated second country in testing |
 | Public data source instability | Broken recommendations | Cache, provenance, fallback provider, no unverified critical dependency |
 | “AI” overpromising | Poor decisions and reputational loss | Explainable rules first, outcome evaluation, confidence and human override |
 | Partner bias in pilot | Results do not generalize | Controls, stratification, full-season evaluation, independent review |
 
 ---
 
-## 17. Decisions needed before engineering starts
+## 18. Decisions needed before engineering starts
 
-1. Which value chain and counties does Factora already serve?
-2. Who is the paying customer: farm, cooperative, exporter, county program, or input/irrigation partner?
-3. What farm, plot, crop, inventory, work-order, and accounting functions already exist in Factora ERP?
-4. Does Factora already have a device broker, tenant model, mobile app, messaging provider, and field-service workflow?
-5. Which water sources and irrigation methods dominate candidate farms?
-6. What languages and phone types do operators use?
-7. Which agronomist or research institution will approve crop profiles?
-8. Which exact hardware models have Kenyan approval and local spares/support?
-9. Where is Factora data hosted, and which subprocessors receive farmer data?
-10. What outcome would cause the pilot partner to buy after the pilot?
-
----
-
-## 18. Immediate next actions
-
-1. Appoint one product owner and one agronomy owner.
-2. Select three candidate anchor partners and score them on farm density, crop value, irrigation, records, agronomy support, and willingness to pay.
-3. Run structured field discovery and an RF/power/site survey.
-4. Audit the current Factora ERP APIs, tenancy, work orders, notification stack, and hosting.
-5. Obtain quotations and Kenyan approval evidence for two sensor/gateway vendors; bench-test both.
-6. Draft the pilot protocol, privacy notice, consent/contract terms, data-sharing agreement, and DPIA.
-7. Define one crop profile and the first 10–12 rules with a Kenyan agronomist.
-8. Capture baseline operational and economic data before installing hardware.
-9. Build Stage B only after the partner, hardware, baseline, and compliance gates are satisfied.
+1. Which countries and value chains does Factora already serve, and which Kenya segment will launch first?
+2. Who is the paying customer in Kenya: farm, cooperative, exporter, county program, or input/irrigation partner?
+3. Which later markets must the data model accommodate now, even if they are not launched?
+4. What farm, plot, crop, inventory, work-order, currency, and accounting functions already exist in Factora ERP?
+5. Does Factora already have a device broker, tenant model, localization, messaging provider, and field-service workflow?
+6. Which water sources and irrigation methods dominate the candidate Kenyan farms?
+7. Which agronomist or research institution will approve the first Kenya crop profiles?
+8. Which exact hardware models have Kenyan approval, local spares, and equivalents that can later be approved elsewhere?
+9. Where is Factora data hosted, and which subprocessors and countries can receive farmer data?
+10. What outcome would cause the Kenya pilot partner to buy, and what evidence would justify opening country pack two?
 
 ---
 
-## 19. Research sources
+## 19. Immediate next actions
+
+1. Appoint one global product owner, one agronomy owner, and one Kenya country-pack owner.
+2. Record the global-core and country-pack boundary before ERP schema design.
+3. Select three candidate Kenyan anchor partners and score them on farm density, crop value, irrigation, records, agronomy support, and willingness to pay.
+4. Run structured field discovery and an RF/power/site survey.
+5. Audit Factora ERP APIs, tenancy, localization, currency, work orders, notification stack, and hosting regions.
+6. Obtain quotations and Kenyan approval evidence for two sensor/gateway vendors; bench-test both.
+7. Draft the Kenya pilot protocol, privacy notice, consent terms, data-sharing agreement, and DPIA.
+8. Define one Kenya crop-zone profile and the first 10–12 global rule templates with a Kenyan agronomist.
+9. Add a simulated second country pack in testing to prove that language, currency, geography, and radio profile are configuration.
+10. Capture baseline operational and economic data before installing hardware.
+11. Build the platform foundation only after the partner, hardware, baseline, and compliance gates are satisfied.
+
+---
+
+## 20. Research sources
+
+Kenya sources support the first country pack. Global standards define the platform behavior that must remain stable across countries.
+
+### Global methods and standards
+
+- FAO Irrigation and Drainage Paper 56, *Crop evapotranspiration*:  
+  https://www.fao.org/4/x0490e/x0490e00.htm
+- FAO WaPOR water-productivity programme:  
+  https://www.fao.org/in-action/remote-sensing-for-water-productivity/en
+- LoRa Alliance RP002 regional parameters:  
+  https://resources.lora-alliance.org/technical-specifications/rp002-1-0-5-lorawan-regional-parameters
+- OASIS MQTT 5.0:  
+  https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
+- NISTIR 8259A, IoT Device Cybersecurity Capability Core Baseline:  
+  https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259A.pdf
+- ITU-T Y.4495, IoT requirements and data models for smart greenhouse service:  
+  https://www.itu.int/rec/T-REC-Y.4495
 
 ### Kenya agriculture and water
 
@@ -880,10 +1003,8 @@ The agronomy and field-operations functions are core product capabilities, not t
   https://www.ca.go.ke/sites/default/files/2023-06/Importation-Type-Approval-And-Distribution-Of-Communications-Equipment-Regulations-2010-1.pdf
 - Communications Authority, IoT device guidelines:  
   https://www.ca.go.ke/sites/default/files/2023-06/Guidelines-on-the-use-of-Internet-of-Things-IoT-Devices.pdf
-- LoRa Alliance, RP002 regional parameters:  
-  https://resources.lora-alliance.org/technical-specifications/rp002-1-0-5-lorawan-regional-parameters
 
-### Privacy and responsible use
+### Kenya privacy and responsible use
 
 - Kenya Data Protection Act 2019:  
   https://www.odpc.go.ke/wp-content/uploads/2024/02/TheDataProtectionAct__No24of2019.pdf
@@ -900,23 +1021,18 @@ The agronomy and field-operations functions are core product capabilities, not t
 - Pest Control Products (Labelling, Advertising and Packaging) Regulations 2024:  
   https://new.kenyalaw.org/akn/ke/act/ln/2024/99/eng@2024-06-21
 
-### Technical standards and sensor quality
+### Sensor quality
 
-- OASIS MQTT 5.0:  
-  https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
-- NISTIR 8259A, IoT Device Cybersecurity Capability Core Baseline:  
-  https://nvlpubs.nist.gov/nistpubs/ir/2020/NIST.IR.8259A.pdf
 - IAEA, field estimation of soil water content and sensor limitations:  
   https://www-pub.iaea.org/mtcd/publications/pdf/tcs-30_web.pdf
 - FAO GLOSOLAN, soil electrical conductivity SOP:  
   https://openknowledge.fao.org/server/api/core/bitstreams/80c029bc-0dc5-4060-8b14-1dbcc20e6528/content
-- ITU-T Y.4495, IoT requirements and data models for smart greenhouse service:  
-  https://www.itu.int/rec/T-REC-Y.4495
 
 ### Evidence cautions
 
-- Farm-size, irrigation-area, smartphone, and coverage figures vary by year and definition. Use them to size and segment the opportunity, not as precise design inputs.
+- Farm-size, irrigation-area, smartphone, and coverage figures vary by year and definition. Use them to size the first market, not as permanent product assumptions.
 - Coverage is not the same as reliable farm-level signal, and connected-handset counts are not the same as individual farmer smartphone ownership.
-- Vendor-reported yield or water-saving claims should not be used in Factora forecasts without an independent Kenyan field baseline.
+- Vendor-reported yield or water-saving claims should not enter Factora forecasts without an independent field baseline in the operating country.
 - Government and third-party data portals may not provide production-grade APIs or guaranteed uptime.
+- A crop threshold, radio approval, or privacy term validated in Kenya must be revalidated before reuse in another country.
 
