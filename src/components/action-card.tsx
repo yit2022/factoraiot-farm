@@ -112,7 +112,11 @@ export function ActionCard({ action }: { action: FarmAction }) {
       </CardContent>
       <CardFooter className="flex flex-wrap gap-2">
         {action.plotId ? (
-          <Button variant="outline" render={<Link href={`/plots/${action.plotId}`} />}>
+          <Button
+            nativeButton={false}
+            variant="outline"
+            render={<Link href={`/plots/${action.plotId}`} />}
+          >
             Open plot
           </Button>
         ) : null}

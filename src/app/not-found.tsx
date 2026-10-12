@@ -8,7 +8,7 @@ export default function NotFound() {
       <p className="text-sm text-muted-foreground">
         The sample tenant only includes the South Block plots in Nakuru County.
       </p>
-      <Button className="w-fit" render={<Link href="/plots" />}>
+      <Button className="w-fit" nativeButton={false} render={<Link href="/plots" />}>
         Back to plots
       </Button>
     </div>

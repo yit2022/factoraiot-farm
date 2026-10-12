@@ -45,6 +45,7 @@ function NavLinks({ closeOnNavigate = false }: { closeOnNavigate?: boolean }) {
           return (
             <SheetClose
               key={link.href}
+              nativeButton={false}
               render={<Link href={link.href} className={className} />}
             >
               {link.label}
